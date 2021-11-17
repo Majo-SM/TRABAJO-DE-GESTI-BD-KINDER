@@ -1,0 +1,14 @@
+---Procedimiento almacenado que retorne todas las 
+--actividades que tiene un programa que se le ingrese.
+CREATE OR REPLACE FUNCTION ACTIVIDADES (VARCHAR) RETURNS SETOF VARCHAR
+AS
+$$ 
+
+SELECT DESCRIPCION FROM ACTIVIDAD_EN_PROGRAMA ACT
+INNER JOIN PROGRAMA PRG ON PRG.COD_PROG = ACT.COD_PROG
+WHERE NOM_PROG = $1
+
+$$
+LANGUAGE SQL;
+
+SELECT ACTIVIDADES('arte/motriz');
